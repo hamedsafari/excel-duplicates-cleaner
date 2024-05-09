@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Docker Login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASS: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag hamedsafari/excel-duplicates-cleaner:latest
+    - name: Push image
+      run: docker push hamedsafari/excel-duplicates-cleaner:latest
