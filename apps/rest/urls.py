@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.rest.views import ExcelDuplicateCleanerAPIView, GoogleCalendarAPIView
+from apps.rest.views import ExcelDuplicateCleanerAPIView
 
 urlpatterns = [
     path(
@@ -7,5 +7,4 @@ urlpatterns = [
         ExcelDuplicateCleanerAPIView.as_view(),
         name="duplicates-cleaner",
     ),
-    path("calendar/", GoogleCalendarAPIView.as_view(), name="calendar"),
 ]
